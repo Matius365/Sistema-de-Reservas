@@ -1,0 +1,11 @@
+[
+  {
+    "id": 101,
+    "recurso_id": 2,
+    "fecha": "2026-05-10",
+    "hora_inicio": "10:00",
+    "hora_fin": "12:00",
+    "numero_plazas": 5,
+    "estado": "confirmada"
+  }
+]

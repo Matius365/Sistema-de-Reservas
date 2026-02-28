@@ -1,0 +1,228 @@
+openapi: 3.0.3
+info:
+  title: API Sistema de Reservas
+  description: API REST para la gestión completa de reservas de recursos
+  version: 1.0.0
+
+servers:
+  - url: https://api.reservas.local/api/v1
+
+paths:
+
+  /reservas:
+    get:
+      summary: Listar todas las reservas
+      description: Devuelve la lista completa de reservas registradas en el sistema.
+      responses:
+        '200':
+          description: Lista de reservas obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reserva'
+
+    post:
+      summary: Crear una nueva reserva
+      description: Crea una nueva reserva para un recurso determinado.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservaInput'
+      responses:
+        '201':
+          description: Reserva creada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reserva'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /reservas/{id}:
+    get:
+      summary: Obtener una reserva por ID
+      description: Devuelve la información detallada de una reserva concreta.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Identificador único de la reserva
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Reserva encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reserva'
+        '404':
+          description: Reserva no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    patch:
+      summary: Modificar parcialmente una reserva
+      description: Permite modificar algunos campos de una reserva existente.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservaInput'
+      responses:
+        '200':
+          description: Reserva actualizada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reserva'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      summary: Eliminar una reserva
+      description: Elimina una reserva existente.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '204':
+          description: Reserva eliminada correctamente
+        '404':
+          description: Reserva no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+
+  schemas:
+
+    Reserva:
+      type: object
+      description: Modelo completo de una reserva
+      properties:
+        id:
+          type: integer
+          example: 101
+        usuario_id:
+          type: integer
+          example: 5
+        recurso_id:
+          type: integer
+          example: 2
+        fecha:
+          type: string
+          format: date
+          example: 2026-05-10
+        hora_inicio:
+          type: string
+          example: "10:00"
+        hora_fin:
+          type: string
+          example: "12:00"
+        numero_plazas:
+          type: integer
+          minimum: 1
+          example: 5
+        coste:
+          type: number
+          minimum: 0
+          example: 25.0
+        estado:
+          type: string
+          enum:
+            - pendiente
+            - confirmada
+            - cancelada
+          example: pendiente
+        motivo:
+          type: string
+          maxLength: 100
+          example: Reunión de equipo
+        observaciones:
+          type: string
+          maxLength: 255
+          example: Necesitamos proyector
+        created_at:
+          type: string
+          format: date-time
+          example: 2026-02-28T10:00:00Z
+        updated_at:
+          type: string
+          format: date-time
+          example: 2026-02-28T10:15:00Z
+
+    ReservaInput:
+      type: object
+      description: Modelo de entrada para crear o modificar reservas
+      required:
+        - recurso_id
+        - fecha
+        - hora_inicio
+        - hora_fin
+        - numero_plazas
+        - motivo
+      properties:
+        recurso_id:
+          type: integer
+          minimum: 1
+        fecha:
+          type: string
+          format: date
+        hora_inicio:
+          type: string
+        hora_fin:
+          type: string
+        numero_plazas:
+          type: integer
+          minimum: 1
+        motivo:
+          type: string
+          maxLength: 100
+        observaciones:
+          type: string
+          maxLength: 255
+
+    Error:
+      type: object
+      description: Modelo genérico de error
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string

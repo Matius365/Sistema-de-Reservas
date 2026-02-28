@@ -1,0 +1,9 @@
+{
+  "error": "Error de validación",
+  "detalles": [
+    {
+      "campo": "hora_inicio",
+      "mensaje": "Debe ser menor que hora_fin"
+    }
+  ]
+}

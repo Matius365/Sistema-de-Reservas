@@ -1,0 +1,13 @@
+{
+  "id": 101,
+  "usuario_id": 5,
+  "recurso_id": 2,
+  "fecha": "2026-05-10",
+  "hora_inicio": "10:00",
+  "hora_fin": "12:00",
+  "numero_plazas": 5,
+  "coste": 25.0,
+  "estado": "pendiente",
+  "motivo": "Reunión de equipo",
+  "observaciones": "Necesitamos proyector"
+}
