@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="MainController">
+
+    <!-- ================= USUARIOS ================= -->
+    <Label text="GESTIÓN DE USUARIOS" />
+
+    <TableView fx:id="tablaUsuarios" prefHeight="150">
+        <columns>
+            <TableColumn fx:id="colId" text="ID"/>
+            <TableColumn fx:id="colNombre" text="Nombre"/>
+            <TableColumn fx:id="colCorreo" text="Correo"/>
+            <TableColumn fx:id="colTipo" text="Tipo"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="5">
+        <TextField fx:id="txtId" promptText="ID"/>
+        <TextField fx:id="txtNombre" promptText="Nombre"/>
+        <TextField fx:id="txtCorreo" promptText="Correo"/>
+        <TextField fx:id="txtPass" promptText="Contraseña"/>
+        <TextField fx:id="txtTipo" promptText="Tipo"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Button text="Añadir" onAction="#insertarUsuario"/>
+        <Button text="Modificar" onAction="#actualizarUsuario"/>
+        <Button text="Eliminar" onAction="#eliminarUsuario"/>
+        <Button text="Refrescar" onAction="#cargarUsuarios"/>
+    </HBox>
+
+
+    <!-- ================= RESERVAS ================= -->
+    <Label text="GESTIÓN DE RESERVAS" />
+
+    <TableView fx:id="tablaReservas" prefHeight="150">
+        <columns>
+            <TableColumn fx:id="colRecurso" text="Recurso"/>
+            <TableColumn fx:id="colReserva" text="Reserva"/>
+            <TableColumn fx:id="colUsuarioR" text="Usuario"/>
+            <TableColumn fx:id="colHoraIni" text="Inicio"/>
+            <TableColumn fx:id="colHoraFin" text="Fin"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="5">
+        <TextField fx:id="txtRecurso" promptText="ID Recurso"/>
+        <TextField fx:id="txtReserva" promptText="ID Reserva"/>
+        <TextField fx:id="txtUsuarioR" promptText="ID Usuario"/>
+        <TextField fx:id="txtHoraIni" promptText="Hora Inicio"/>
+        <TextField fx:id="txtHoraFin" promptText="Hora Fin"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Button text="Añadir" onAction="#insertarReserva"/>
+        <Button text="Modificar" onAction="#actualizarReserva"/>
+        <Button text="Eliminar" onAction="#eliminarReserva"/>
+        <Button text="Refrescar" onAction="#cargarReservas"/>
+    </HBox>
+
+</VBox>
