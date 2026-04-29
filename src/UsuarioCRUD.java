@@ -5,24 +5,33 @@ import java.util.List;
 public class UsuarioCRUD {
 
     // CREATE
-    public void insertar(Usuario u) {
-        String sql = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
+    public int insertar(Usuario u) {
+        String sql = "INSERT INTO usuario (correo_electronico, contrasena, nombre, fecha_nacimiento, tipo_usuario) VALUES (?,?,?,?,?)";
 
         try (Connection con = ConexionDB.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            ps.setInt(1, u.getId());
-            ps.setString(2, u.getCorreo());
-            ps.setString(3, u.getContrasena());
-            ps.setString(4, u.getNombre());
-            ps.setDate(5, new java.sql.Date(u.getFechaNacimiento().getTime()));
-            ps.setString(6, u.getTipo());
+            ps.setString(1, u.getCorreo());
+            ps.setString(2, u.getContrasena());
+            ps.setString(3, u.getNombre());
+            ps.setDate(4, new java.sql.Date(u.getFechaNacimiento().getTime()));
+            ps.setString(5, u.getTipo());
 
             ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1); // 👈 ID generado
+            }
+
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new RuntimeException("EMAIL_DUPLICADO");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return -1;
     }
 
     // READ

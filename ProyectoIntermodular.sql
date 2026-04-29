@@ -21,17 +21,12 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ======================
 
 CREATE TABLE usuario (
-    id_usuario INT,
-    correo_electronico VARCHAR(100) NOT NULL,
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    correo_electronico VARCHAR(100) NOT NULL UNIQUE,
     contrasena VARCHAR(100) NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     fecha_nacimiento DATE,
-    tipo_usuario VARCHAR(20) NOT NULL,
-
-    PRIMARY KEY(id_usuario),
-    UNIQUE(correo_electronico),
-    UNIQUE(nombre),
-    CHECK(tipo_usuario IN ('Administrador','Normal'))
+    tipo_usuario ENUM('Administrador','Normal') NOT NULL
 );
 
 CREATE TABLE administrador (

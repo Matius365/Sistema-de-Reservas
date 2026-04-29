@@ -19,7 +19,7 @@
     </TableView>
 
     <HBox spacing="5">
-        <TextField fx:id="txtId" promptText="ID"/>
+        <TextField fx:id="txtId" promptText="ID" editable="false"/>
         <TextField fx:id="txtNombre" promptText="Nombre"/>
         <TextField fx:id="txtCorreo" promptText="Correo"/>
         <TextField fx:id="txtPass" promptText="Contraseña"/>

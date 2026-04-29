@@ -12,7 +12,7 @@ public class MainController {
     @FXML private TableColumn<Usuario, Integer> colId;
     @FXML private TableColumn<Usuario, String> colNombre, colCorreo, colTipo;
 
-    @FXML private TextField txtId, txtNombre, txtCorreo, txtPass, txtTipo;
+    @FXML private TextField txtId,txtNombre, txtCorreo, txtPass, txtTipo;
 
     private UsuarioCRUD usuarioDAO = new UsuarioCRUD();
 
@@ -58,33 +58,56 @@ public class MainController {
     public void insertarUsuario() {
         try {
             Usuario u = new Usuario(
-                    Integer.parseInt(txtId.getText()),
+                    0,
                     txtCorreo.getText(),
                     txtPass.getText(),
                     txtNombre.getText(),
                     new Date(),
                     txtTipo.getText()
             );
-            usuarioDAO.insertar(u);
+
+            int idGenerado = usuarioDAO.insertar(u);
+
+            if (idGenerado != -1) {
+                txtId.setText(String.valueOf(idGenerado)); // 👈 mostrar ID
+            }
+
             cargarUsuarios();
-        } catch (Exception e) {
-            error("Error al insertar usuario");
+            limpiarCamposUsuario();
+            txtNombre.requestFocus();
+
+        } catch (RuntimeException e) {
+
+            if ("EMAIL_DUPLICADO".equals(e.getMessage())) {
+                warning("El correo ya está registrado");
+            } else {
+                error("Error al insertar usuario");
+            }
         }
     }
 
     @FXML
     public void actualizarUsuario() {
+        Usuario seleccionado = tablaUsuarios.getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            warning("Selecciona un usuario");
+            return;
+        }
+
         try {
             Usuario u = new Usuario(
-                    Integer.parseInt(txtId.getText()),
+                    seleccionado.getId(), // 👈 importante
                     txtCorreo.getText(),
                     txtPass.getText(),
                     txtNombre.getText(),
                     new Date(),
                     txtTipo.getText()
             );
+
             usuarioDAO.actualizar(u);
             cargarUsuarios();
+
         } catch (Exception e) {
             error("Error al actualizar usuario");
         }
@@ -92,19 +115,40 @@ public class MainController {
 
     @FXML
     public void eliminarUsuario() {
-        usuarioDAO.eliminar(Integer.parseInt(txtId.getText()));
-        cargarUsuarios();
+        Usuario u = tablaUsuarios.getSelectionModel().getSelectedItem();
+
+        if (u != null) {
+            usuarioDAO.eliminar(u.getId());
+            cargarUsuarios();
+        } else {
+            warning("Selecciona un usuario");
+        }
     }
 
     private void seleccionarUsuario() {
         Usuario u = tablaUsuarios.getSelectionModel().getSelectedItem();
         if (u != null) {
-            txtId.setText(String.valueOf(u.getId()));
+            //txtId.setText(String.valueOf(u.getId()));
             txtNombre.setText(u.getNombre());
             txtCorreo.setText(u.getCorreo());
             txtTipo.setText(u.getTipo());
         }
     }
+
+    private void limpiarCamposUsuario() {
+        txtNombre.clear();
+        txtCorreo.clear();
+        txtPass.clear();
+        txtTipo.clear();
+    }
+
+    //Alertas y Warnings
+    private void warning(String msg) {
+        Alert a = new Alert(Alert.AlertType.WARNING);
+        a.setContentText(msg);
+        a.show();
+    }
+
 
     // ===== CRUD RESERVAS =====
     @FXML
