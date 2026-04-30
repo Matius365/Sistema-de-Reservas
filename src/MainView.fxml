@@ -14,6 +14,7 @@
             <TableColumn fx:id="colId" text="ID"/>
             <TableColumn fx:id="colNombre" text="Nombre"/>
             <TableColumn fx:id="colCorreo" text="Correo"/>
+            <TableColumn fx:id="colFechaNacimiento" text="Fecha de Nacimiento"/>
             <TableColumn fx:id="colTipo" text="Tipo"/>
         </columns>
     </TableView>
@@ -23,14 +24,18 @@
         <TextField fx:id="txtNombre" promptText="Nombre"/>
         <TextField fx:id="txtCorreo" promptText="Correo"/>
         <TextField fx:id="txtPass" promptText="Contraseña"/>
-        <TextField fx:id="txtTipo" promptText="Tipo"/>
+        <!--<TextField fx:id="txtFechaNacimiento" promptText="Fecha (aaaa-mm-dd)"/>-->
+        <DatePicker fx:id="dateNacimiento"/>
+        <!--<TextField fx:id="txtTipo" promptText="Tipo"/>-->
+        <ComboBox fx:id="cbTipo" promptText="Tipo de usuario"/>
     </HBox>
 
     <HBox spacing="10">
-        <Button text="Añadir" onAction="#insertarUsuario"/>
+        <Button fx:id="btnInsertar" text="Añadir" onAction="#insertarUsuario"/>
+        <!--<Button text="Añadir" onAction="#insertarUsuario"/>-->
         <Button text="Modificar" onAction="#actualizarUsuario"/>
         <Button text="Eliminar" onAction="#eliminarUsuario"/>
-        <Button text="Refrescar" onAction="#cargarUsuarios"/>
+        <Button text="Limpiar" onAction="#resetFormularioUsuarios"/>
     </HBox>
 
 
@@ -42,8 +47,13 @@
             <TableColumn fx:id="colRecurso" text="Recurso"/>
             <TableColumn fx:id="colReserva" text="Reserva"/>
             <TableColumn fx:id="colUsuarioR" text="Usuario"/>
+            <TableColumn fx:id="colFecha" text="Fecha"/>
             <TableColumn fx:id="colHoraIni" text="Inicio"/>
             <TableColumn fx:id="colHoraFin" text="Fin"/>
+            <TableColumn fx:id="colCoste" text="Coste"/>
+            <TableColumn fx:id="colPlazas" text="Plazas"/>
+            <TableColumn fx:id="colMotivo" text="Motivo"/>
+            <TableColumn fx:id="colObs" text="Observaciones"/>
         </columns>
     </TableView>
 
@@ -51,15 +61,24 @@
         <TextField fx:id="txtRecurso" promptText="ID Recurso"/>
         <TextField fx:id="txtReserva" promptText="ID Reserva"/>
         <TextField fx:id="txtUsuarioR" promptText="ID Usuario"/>
-        <TextField fx:id="txtHoraIni" promptText="Hora Inicio"/>
-        <TextField fx:id="txtHoraFin" promptText="Hora Fin"/>
+        <DatePicker fx:id="dateReserva"/>
+        <!--<TextField fx:id="txtHoraIni" promptText="Hora Inicio"/>-->
+        <!--<TextField fx:id="txtHoraFin" promptText="Hora Fin"/>-->
+        <Spinner fx:id="spHoraIni"/>
+        <Spinner fx:id="spMinIni"/>
+        <Spinner fx:id="spHoraFin"/>
+        <Spinner fx:id="spMinFin"/>
+        <TextField fx:id="txtCoste" promptText="Coste"/>
+        <TextField fx:id="txtPlazas" promptText="Plazas"/>
+        <TextField fx:id="txtMotivo" promptText="Motivo"/>
+        <TextField fx:id="txtObservaciones" promptText="Observaciones"/>
     </HBox>
 
     <HBox spacing="10">
         <Button text="Añadir" onAction="#insertarReserva"/>
         <Button text="Modificar" onAction="#actualizarReserva"/>
         <Button text="Eliminar" onAction="#eliminarReserva"/>
-        <Button text="Refrescar" onAction="#cargarReservas"/>
+        <Button text="Limpiar" onAction="#resetReservas"/>
     </HBox>
 
 </VBox>

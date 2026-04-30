@@ -32,7 +32,7 @@ public class ReservaCRUD {
     // READ
     public List<Reserva> obtenerTodas() {
         List<Reserva> lista = new ArrayList<>();
-        String sql = "SELECT * FROM reserva";
+        String sql = "SELECT * FROM  reserva ORDER BY fecha ASC";
 
         try (Connection con = ConexionDB.getConnection();
              Statement st = con.createStatement();
@@ -99,5 +99,60 @@ public class ReservaCRUD {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Reserva> obtenerPorUsuario(int idUsuario) {
+
+        List<Reserva> lista = new ArrayList<>();
+        String sql = "SELECT * FROM reserva WHERE id_usuario=?";
+
+        try (Connection con = ConexionDB.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                lista.add(new Reserva(
+                        rs.getInt("id_recurso"),
+                        rs.getInt("id_reserva_local"),
+                        rs.getInt("id_usuario"),
+                        rs.getDate("fecha"),
+                        rs.getString("hora_inicio"),
+                        rs.getString("hora_fin"),
+                        rs.getDouble("coste"),
+                        rs.getInt("numero_plazas"),
+                        rs.getString("motivo"),
+                        rs.getString("observaciones")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public int siguienteIdReserva(int idRecurso) {
+
+        String sql = "SELECT IFNULL(MAX(id_reserva_local),0)+1 FROM reserva WHERE id_recurso=?";
+
+        try (Connection con = ConexionDB.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idRecurso);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 1; // fallback
     }
 }
