@@ -131,7 +131,6 @@ public class MainController {
         }
 
         try {
-//            java.sql.Date fecha = java.sql.Date.valueOf(txtFechaNacimiento.getText());
             java.sql.Date sqlDate = null;
             if (dateNacimiento.getValue() != null) {
                 LocalDate fecha = dateNacimiento.getValue();
