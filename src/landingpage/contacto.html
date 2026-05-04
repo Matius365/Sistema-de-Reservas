@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Contacto — Envíanos un mensaje para iniciar tu proyecto.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto — MatiusTech</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <img src="img/logo1.png" alt="Logo Consultora">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="proyecto-reservas.html">Proyecto</a></li>
+                <li><a href="cronologia.html">Cronología</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1>Contacto</h1>
+
+    <form action="https://morning-paper-a0fc.contry-1990.workers.dev" method="POST">
+
+        <label>Nombre:
+            <input type="text" name="nombre" required>
+        </label>
+
+        <label>Email:
+            <input type="email" name="email" required>
+        </label>
+
+        <label>Motivo:
+            <select name="motivo" required>
+                <option value="" disabled selected>Selecciona...</option>
+                <option value="consulta">Consulta</option>
+                <option value="presupuesto">Presupuesto</option>
+                <option value="soporte">Soporte Técnico</option>
+            </select>
+        </label>
+
+        <label>Mensaje:
+            <textarea name="mensaje" minlength="10" required></textarea>
+        </label>
+
+        <label class="checkbox-label">
+            <input type="checkbox" name="privacidad" required>
+            Acepto la política de privacidad
+        </label>
+
+        <button class="btn-cta" type="submit">Enviar</button>
+    </form>
+
+</main>
+
+<footer>
+    <div class="container">
+        © 2025 MatiusTech — Contacto
+    </div>
+</footer>
+
+</body>
+</html>

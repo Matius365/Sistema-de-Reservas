@@ -1,0 +1,313 @@
+/* -----------------------------------------------------------
+   Proyecto Consultora UP6 Lenguajes de Marcas — style.css
+    Autor: Jose Mateo Lopez 2ºQ DAM
+----------------------------------------------------------- */
+
+/* -----------------------------
+   RESET + BASE GLOBAL
+----------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* requerido */
+}
+
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: #ffffff;
+}
+
+/* -----------------------------
+   VARIABLES CSS
+----------------------------- */
+
+:root {
+    --color-primary: #005bbb;
+    --color-secondary: #003f7d;
+    --color-bg-light: #f5f7fa;
+    --color-text: #222;
+    --color-accent: #00a8e8;
+
+    --max-width: 1200px;
+}
+
+/* -----------------------------
+   LAYOUT GLOBAL
+----------------------------- */
+
+header {
+    background: var(--color-primary);
+    padding: 1.5rem;
+    color: white;
+}
+
+header .container,
+footer .container,
+main .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+nav ul {
+    display: flex; /* requerido */
+    gap: 2rem;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+/* -----------------------------
+   IMÁGENES LOGO Y OTRAS FIJAS
+----------------------------- */
+
+header img,
+footer img {
+    width: 8rem;       /* tamaño base en rem */
+    max-width: 100%;   /* nunca exceda el contenedor */
+    height: auto;      /* mantiene proporción */
+    display: block;    /* elimina espacios extra si es inline */
+}
+
+/* -----------------------------
+   HERO (index.html)
+----------------------------- */
+
+#hero-index {
+    background: url("../img/mockup-proyecto.jpg") center/cover no-repeat;
+    height: 60vh;
+    display: flex; /* requerido */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.hero-content {
+    background-color: rgba(0, 0, 0, 0.45);
+    padding: 3rem;
+    border-radius: 1rem;
+}
+
+.btn-cta {
+    background: var(--color-accent);
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    display: inline-block;
+    border-radius: .5rem;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-cta:hover {
+    background: var(--color-secondary);
+}
+
+/* -----------------------------
+   TARJETAS DE SERVICIOS (index)
+----------------------------- */
+
+.servicios {
+    display: flex;
+    flex-wrap: wrap; /* requerido */
+    gap: 2rem;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.tarjeta {
+    background: var(--color-bg-light);
+    padding: 2rem;
+    width: 28rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+}
+
+/* -----------------------------
+   LAYOUT DOS COLUMNAS (proyecto-reservas)
+----------------------------- */
+
+.layout {
+    display: flex; /* requerido */
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.layout main {
+    flex-grow: 1; /* requerido */
+}
+
+.layout aside {
+    width: 25rem;
+    background: var(--color-bg-light);
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+
+/* -----------------------------
+   TABLA (cronologia)
+----------------------------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+th, td {
+    padding: 1rem;
+    border: 1px solid #ccc;
+}
+
+tr:nth-child(even) {
+    background: #eef3f7; /* efecto zebra requerido */
+}
+
+/* -----------------------------
+   FORMULARIO (contacto)
+----------------------------- */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 50rem;
+    margin: 2rem auto;
+    background: var(--color-bg-light);
+    padding: 2rem;
+    border-radius: 1rem;
+    align-items: stretch;       /* que los inputs ocupen todo el ancho disponible */
+}
+
+input, textarea, select {
+    padding: 1rem;
+    font-size: 1.6rem;
+    border-radius: .5rem;
+    border: 1px solid #bbb;
+    transition: 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-accent); /* requerido */
+}
+
+/* valid / invalid */
+input:valid {
+    border-color: green;
+}
+
+input:invalid {
+    border-color: red;
+}
+
+/* Labels y campos */
+form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+/* Inputs, textarea y select */
+form input,
+form textarea,
+form select {
+    width: 100%;                /* ocupan todo el ancho del label */
+    padding: 1rem;
+    font-size: 1.6rem;
+    border-radius: .5rem;
+    border: 1px solid #bbb;
+    transition: 0.3s;
+}
+
+/* Checkbox */
+form label input [type="checkbox"] {
+    width: auto;               /* no ocupa todo el ancho */
+    margin-right: 1rem;
+    vertical-align: middle;
+}
+/* Cambiar layout solo para checkboxes */
+form label.checkbox-label {
+    display: flex;           /* flex horizontal */
+    align-items: center;     /* centra verticalmente checkbox y texto */
+    gap: 0.5rem;             /* separa checkbox y texto */
+    font-weight: 500;
+}
+
+/* Botón centrado */
+form button.btn-cta {
+    align-self: center;        /* centra el botón horizontalmente */
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+}
+
+/* -----------------------------
+   FOOTER
+----------------------------- */
+
+footer {
+    background: var(--color-secondary);
+    color: white;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+/* -----------------------------
+   RESPONSIVE DESIGN
+   @media (requerido)
+----------------------------- */
+/* BREAKPOINT DOCUMENTADO - NO ES COPIA */
+
+@media (max-width: 768px) {
+    /* ---- MENÚ ---- */
+    nav ul {
+        flex-direction: column; /* requerido */
+        gap: 1rem;
+    }
+
+    /* ---- LAYOUT ---- */
+    .layout {
+        flex-direction: column; /* requerido */
+    }
+
+    aside {
+        width: 100%;
+    }
+
+    /* ---- GALERÍA ---- */
+    .servicios {
+        flex-direction: column; /* requerido */
+        align-items: center;
+    }
+}
