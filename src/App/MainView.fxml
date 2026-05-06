@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="15" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="MainController">
+      fx:controller="App.MainController">
 
     <!-- ================= USUARIOS ================= -->
     <Label text="GESTIÓN DE USUARIOS" />

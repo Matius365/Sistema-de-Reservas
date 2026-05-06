@@ -1,3 +1,4 @@
+package App;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
