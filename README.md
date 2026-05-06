@@ -1,11 +1,22 @@
-Esta es mi aplicación para la gestión de reservas.
-En un principio, no tenía la estructura que se pedía en la asignatura de EDE,
-pero ya la tiene, aunque las carpetas vacías no las incluye Github, las cuales se irán subiendo
-a lo largo del proceso de creación del programa.
-Para empezar, solo he creado los CRUD para los usuarios y las reservas de los distintos medios disponibles,
-más adelante quiero hacerlo completo.
-Se puede crear un usuario, borrarlo, editarlo y leer todos, lo mismo con las reservas, y a la hora de seleccionar un
-usuario, aparecen tambien las reservas que tienen activas. Los usuarios que son administradores no pueden hacer reservas,
-y cada usuario tiene un numero de reserva correlativo, es decir, puede aparecer un mismo numero de reserva, pero no 
-corresponde al mismo usuario.
-He modificado el archivo sql que creé para sqldeveloper para que funcionara en mariaDB.
+Este repositorio contiene el desarrollo de la aplicación de gestión de reservas, creada como proyecto principal para la asignatura de Proyecto Intermodular 1.
+
+El proyecto ha sido desarrollado progresivamente para cumplir con la asignatura. Algunas carpetas actualmente no aparecen en el repositorio porque están vacías, pero se irán incorporando a medida que avance el desarrollo, ya que GitHub no gestiona carpetas vacías.
+
+Actualmente, la aplicación implementa las operaciones CRUD completas para:
+
+- Usuarios
+- Reservas de recursos disponibles
+
+Funcionalidades destacadas:
+
+- Creación, edición, eliminación y consulta de usuarios y reservas
+
+- Visualización de las reservas activas al seleccionar un usuario
+
+- Restricción de reservas para usuarios con rol de administrador
+
+- Gestión de identificadores de reserva correlativos por usuario (pueden repetirse entre usuarios, pero no para un mismo usuario)
+
+Además, el script SQL original ha sido adaptado desde Oracle SQL Developer a MariaDB para garantizar su correcto funcionamiento en el entorno actual.
+
+Me gustaría que el proyecto continuara evolucionando hasta incluir la gestión completa del sistema de reservas y mejoras en la interfaz y funcionalidad.
